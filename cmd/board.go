@@ -95,7 +95,7 @@ func exponentiateSquares(squares []int) int {
 	return output
 }
 
-func (b *Board) HasWinner() ( winner Square) {
+func (b *Board) HasWinner() ( gameover bool, winner Square) {
 	// A winner exists if there are three in a row
 	// square numbers are exponentiated to make the combinations unique
 	// 0, 1, 2 => 1 + 2 + 4 = 7
@@ -117,14 +117,19 @@ func (b *Board) HasWinner() ( winner Square) {
 
 	for _, combination := range winningCombinations {
 		if xExponentiated & combination == combination {
-			return X
+			return true, X
 		}
 
 		if oExponentiated & combination == combination {
-			return O
+			return true, O
 		}
 	}
 
-	// No winner
-	return Empty
+	// Now we have to check if all 9 squares are taken, if so, it's a draw
+	if len(xSquares) + len(oSquares) == 9 {
+		return true, Empty
+	}
+
+	// No winner and no draw
+	return false, Empty
 }

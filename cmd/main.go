@@ -51,8 +51,10 @@ func main() {
 	currentPlayer := X
 	cursor := 4
 
-	// While there is no winner
-	for board.HasWinner() == Empty {
+	gameover := false
+	winner := Empty
+
+	for gameover == false {
 
 		// Draw board
 		draw(board, currentPlayer, cursor)
@@ -93,20 +95,15 @@ func main() {
 			currentPlayer = X
 		}
 
+		// Check for a winner
+		gameover, winner = board.HasWinner()
+
 	}
 
 	// Draw board one more time because draw() is performed at the top of the loop
 	// Cursor -1 is a special case that tells draw() to not draw the cursor
 	draw(board, currentPlayer, -1)
 
-	var winner Square
-	if currentPlayer == X {
-		winner = O
-	} else {
-		winner = X
-	}
-
-	// We have a winner
 	fmt.Printf("\n%s wins!\n", winner)
 
 }

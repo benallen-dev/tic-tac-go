@@ -11,7 +11,7 @@ go run .
 
 ## TODO:
 
-- [ ] Handle stalemate case
+- [x] Handle stalemate case
 - [ ] Use a cursor to choose a cell instead of array index
   - [ ] Use hjkl to move the cursor position
   - [ ] Add cursor position to draw function
